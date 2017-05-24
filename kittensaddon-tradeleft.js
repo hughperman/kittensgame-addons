@@ -5,6 +5,7 @@ tradeOnLeft = {
   tradeLeft: function(race, ratio) {
     var tradeMax = game.diplomacy.getMaxTradeAmt(race);
     var tradeAmount = Math.floor(tradeMax * ratio);
+	if (tradeAmount<1){ tradeAmount = 1;}
     game.diplomacy.tradeMultiple(race, tradeAmount);
   },
 
@@ -17,7 +18,7 @@ tradeOnLeft = {
 
     for (var i = 0; i < 8; i++) {
 	  this.interFace += "<tr class=\"resourceRow\" style=\"opacity: 1;\">";
-	  this.interFace += "<td style=\"width: 75px;\">" + races[i].name + ":</td>";
+	  this.interFace += "<td style=\"width: 75px;\"><a href=\"#\" id=\"" + races[i].name + "_trade_10\" onclick=\"tradeOnLeft.tradeLeft(game.diplomacy.races[" + i + "],0)\">" + races[i].name + "</a>:</td>";
 	  this.interFace += "<td>"+races[i].sells.reduce(function(acc, val){return acc + ", " + val.name;},"").substring(2);+"</td>";
 	  this.interFace += "<td style=\"width: 20px;\"><a href=\"#\" id=\"" + races[i].name + "_trade_10\" onclick=\"tradeOnLeft.tradeLeft(game.diplomacy.races[" + i + "],0.1)\">10%</a></td>";
 	  this.interFace += "<td style=\"width: 20px;\"><a href=\"#\" id=\"" + races[i].name + "_trade_50\" onclick=\"tradeOnLeft.tradeLeft(game.diplomacy.races[" + i + "],0.5)\">50%</a></td>";
